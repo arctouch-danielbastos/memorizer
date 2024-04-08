@@ -13,11 +13,6 @@
   background-color: var(--color-inverse-primary);
 }
 
-@mixin disabled {
-  color: var(--color-on-disabled);
-  background-color: var(--color-disabled);
-}
-
 @mixin secondary {
   color: var(--color-on-secondary);
   background-color: var(--color-secondary);

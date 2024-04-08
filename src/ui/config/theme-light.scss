@@ -29,7 +29,7 @@
     --color-on-primary: var(--palette-primary100);
     --color-primary-container: var(--palette-primary90);
     --color-primary: var(--palette-primary40);
-    --color-disabled: rgb(from var(--color-on-surface) r g b / 0.12);
-    --color-on-disabled: rgb(from var(--color-on-surface) r g b / 0.38);
+    --color-surface-container-low: var(--palette-neutral-variant95);
+    --color-surface-tint: var(--palette-primary40);
   }
 }

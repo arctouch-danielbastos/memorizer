@@ -1,21 +1,70 @@
 @use "./utils/colors.scss";
 @use "./utils/font.scss";
-@use "sass:color";
 
-.button {
-  @include font.labelLarge();
-
-  height: 40px;
-  padding: 0 24px 0 16px;
+@mixin resetButton() {
   outline: none;
   border: none;
   margin: 0;
   overflow: visible;
-  background: transparent;
   cursor: pointer;
+}
+
+@mixin elevation($default: null, $hover: null) {
+  @if $default {
+    &:enabled {
+      box-shadow: $default;
+    }
+  }
+
+  @if $hover {
+    &:hover:enabled {
+      box-shadow: $hover;
+    }
+  }
+}
+
+@mixin variant($color, $background: transparent) {
+  background-color: $background;
+  color: $color;
+
+  &:disabled {
+    color: rgb(from var(--color-on-surface) r g b / 0.38);
+
+    @if ($background != transparent) {
+      background-color: rgb(from var(--color-on-surface) r g b / 0.12);
+    }
+  }
+
+  &:hover:enabled {
+    .state {
+      background-color: $color;
+      opacity: var(--state-hover-opacity);
+    }
+  }
+
+  &:focus:enabled {
+    .state {
+      background-color: $color;
+      opacity: var(--state-focus-opacity);
+    }
+  }
+
+  &:target:enabled {
+    .state {
+      background-color: $color;
+      opacity: var(--state-pressed-opacity);
+    }
+  }
+}
+
+.button {
+  @include font.labelLarge;
+  @include resetButton;
+
+  height: 40px;
+  padding: 0 24px 0 16px;
   position: relative;
   border-radius: var(--corner-full);
-
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -41,30 +90,43 @@
   align-items: center;
 }
 
+.button.elevated {
+  @include variant(
+    $color: var(--color-surface-tint),
+    $background: var(--color-surface-container-low)
+  );
+
+  @include elevation($default: var(--elevation-1), $hover: var(--elevation-2));
+}
+
 .button.filled {
-  @include colors.primary();
+  @include variant(
+    $color: var(--color-on-primary),
+    $background: var(--color-primary)
+  );
 
-  &:disabled {
-    @include colors.disabled();
-  }
-
-  &:hover:enabled {
-    box-shadow: var(--elevation-one);
-  }
-
-  &:focus:enabled {
-    .state {
-      @include colors.primaryContainer();
-      opacity: 0.1;
-    }
-  }
+  @include elevation($hover: var(--elevation-1));
 }
 
 .button.tonal {
-  @include colors.secondaryContainer();
+  @include variant(
+    $color: var(--color-on-secondary-container),
+    $background: var(--color-secondary-container)
+  );
+
+  @include elevation($hover: var(--elevation-1));
 }
 
 .button.text {
-  color: var(--color-primary);
-  padding: 0;
+  @include variant($color: var(--color-primary));
+  padding: 0 12px;
+}
+
+.button.outlined {
+  @include variant($color: var(--color-primary));
+  border: var(--outline);
+
+  &:disabled {
+    border-color: rgb(from var(--color-on-surface) r g b / 0.12);
+  }
 }

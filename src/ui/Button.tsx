@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import style from "ui/Button.module.scss";
 
-type Variant = "filled" | "tonal" | "text";
+type Variant = "filled" | "tonal" | "text" | "elevated" | "outlined";
 
 type Props = {
   children: string;
@@ -11,7 +11,9 @@ type Props = {
 };
 
 const variantCx: { [variant in Variant]: keyof typeof style } = {
+  elevated: style.elevated,
   filled: style.filled,
+  outlined: style.outlined,
   text: style.text,
   tonal: style.tonal,
 };
