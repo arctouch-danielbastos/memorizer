@@ -1,0 +1,22 @@
+@use "./utils/colors";
+
+:root {
+  --corner-full: 100px;
+  // Elevation
+  --elevation-one: rgba(0, 0, 0, 0.2) 0px 2px 1px -1px,
+    rgba(0, 0, 0, 0.14) 0px 1px 1px 0px, rgba(0, 0, 0, 0.12) 0px 1px 3px 0px;
+}
+
+* {
+  font-family: var(--font-roboto);
+}
+
+html {
+  @include colors.appBackground();
+}
+
+svg {
+  width: 1em;
+  height: 1em;
+  fill: currentColor;
+}

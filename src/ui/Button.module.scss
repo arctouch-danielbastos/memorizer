@@ -1,0 +1,70 @@
+@use "./utils/colors.scss";
+@use "./utils/font.scss";
+@use "sass:color";
+
+.button {
+  @include font.labelLarge();
+
+  height: 40px;
+  padding: 0 24px 0 16px;
+  outline: none;
+  border: none;
+  margin: 0;
+  overflow: visible;
+  background: transparent;
+  cursor: pointer;
+  position: relative;
+  border-radius: var(--corner-full);
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  &:disabled {
+    cursor: default;
+  }
+}
+
+.state {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  border-radius: var(--corner-full);
+}
+
+.icon {
+  margin-right: 8px;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+}
+
+.button.filled {
+  @include colors.primary();
+
+  &:disabled {
+    @include colors.disabled();
+  }
+
+  &:hover:enabled {
+    box-shadow: var(--elevation-one);
+  }
+
+  &:focus:enabled {
+    .state {
+      @include colors.primaryContainer();
+      opacity: 0.1;
+    }
+  }
+}
+
+.button.tonal {
+  @include colors.secondaryContainer();
+}
+
+.button.text {
+  color: var(--color-primary);
+  padding: 0;
+}

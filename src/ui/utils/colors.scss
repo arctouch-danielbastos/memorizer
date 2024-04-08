@@ -1,0 +1,73 @@
+@mixin primary {
+  color: var(--color-on-primary);
+  background-color: var(--color-primary);
+}
+
+@mixin primaryContainer {
+  color: var(--color-on-primary-container);
+  background-color: var(--color-primary-container);
+}
+
+@mixin inversePrimary {
+  color: var(--color-on-inverse-primary);
+  background-color: var(--color-inverse-primary);
+}
+
+@mixin disabled {
+  color: var(--color-on-disabled);
+  background-color: var(--color-disabled);
+}
+
+@mixin secondary {
+  color: var(--color-on-secondary);
+  background-color: var(--color-secondary);
+}
+
+@mixin secondaryContainer {
+  color: var(--color-on-secondary-container);
+  background-color: var(--color-secondary-container);
+}
+
+@mixin tertiary {
+  color: var(--color-on-tertiary);
+  background-color: var(--color-tertiary);
+}
+
+@mixin tertiaryContainer {
+  color: var(--color-on-tertiary-container);
+  background-color: var(--color-tertiary-container);
+}
+
+@mixin error {
+  color: var(--color-on-error);
+  background-color: var(--color-error);
+}
+
+@mixin errorContainer {
+  color: var(--color-on-error-container);
+  background-color: var(--color-error-container);
+}
+
+@mixin surface {
+  color: var(--color-on-surface);
+  background-color: var(--color-surface);
+}
+
+@mixin surfaceVariant {
+  color: var(--color-on-surface-variant);
+  background-color: var(--color-surface-variant);
+}
+
+@mixin appBackground {
+  color: var(--color-on-background);
+  background-color: var(--color-background);
+}
+
+@mixin outline {
+  border: 1px solid var(--color-outline);
+}
+
+@mixin inverseSurface {
+  color: var(--color-on-inverse-surface);
+  background-color: var(--color-inverse-surface);
+}

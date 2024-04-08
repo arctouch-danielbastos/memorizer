@@ -1,0 +1,7 @@
+@mixin labelLarge {
+  font-family: var(--typeface-plain);
+  line-height: var(--type-label-large-line-height);
+  font-size: var(--type-label-large-size);
+  font-weight: var(--type-label-large-weight);
+  letter-spacing: var(--type-label-large-tracking);
+}
