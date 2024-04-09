@@ -23,6 +23,10 @@ html {
   @include colors.appBackground();
 }
 
+body {
+  margin: 0;
+}
+
 svg {
   width: 1em;
   height: 1em;

@@ -1,0 +1,19 @@
+@use "./utils/font.scss";
+
+.root {
+  background-color: var(--color-surface-variant);
+  color: var(--color-on-surface);
+  padding: 96px 16px 24px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.headline {
+  @include font.headlineSmall;
+}
+
+.icon {
+  font-size: 24px;
+}

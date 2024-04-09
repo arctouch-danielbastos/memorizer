@@ -5,3 +5,11 @@
   font-weight: var(--type-label-large-weight);
   letter-spacing: var(--type-label-large-tracking);
 }
+
+@mixin headlineSmall {
+  font-family: var(--typeface-plain);
+  line-height: var(--type-headline-small-line-height);
+  font-size: var(--type-headline-small-size);
+  font-weight: var(--type-headline-small-weight);
+  letter-spacing: var(--type-headline-small-tracking);
+}
