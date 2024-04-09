@@ -1,0 +1,30 @@
+@use "./utils/button.scss";
+.root {
+  @include button.base;
+
+  height: 40px;
+  width: 40px;
+  font-size: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.filled {
+  @include button.color(
+    $background: var(--color-primary),
+    $color: var(--color-on-primary)
+  );
+}
+
+.tonal {
+  @include button.color(
+    $background: var(--color-secondary-container),
+    $color: var(--color-on-secondary-container)
+  );
+}
+
+.outlined {
+  @include button.color($color: var(--color-inverse-surface));
+  @include button.outline;
+}

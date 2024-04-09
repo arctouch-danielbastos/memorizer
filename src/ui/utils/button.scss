@@ -1,0 +1,83 @@
+@mixin reset() {
+  outline: none;
+  border: none;
+  margin: 0;
+  overflow: visible;
+  cursor: pointer;
+}
+
+@mixin base() {
+  @include reset;
+
+  position: relative;
+  border-radius: var(--corner-full);
+
+  .state {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    border-radius: var(--corner-full);
+  }
+
+  &:disabled {
+    cursor: default;
+  }
+}
+
+@mixin elevation($default: null, $hover: null) {
+  @if $default {
+    &:enabled {
+      box-shadow: $default;
+    }
+  }
+
+  @if $hover {
+    &:hover:enabled {
+      box-shadow: $hover;
+    }
+  }
+}
+
+@mixin color($color, $background: transparent) {
+  background-color: $background;
+  color: $color;
+
+  &:disabled {
+    color: rgb(from var(--color-on-surface) r g b / 0.38);
+
+    @if ($background != transparent) {
+      background-color: rgb(from var(--color-on-surface) r g b / 0.12);
+    }
+  }
+
+  &:hover:enabled {
+    .state {
+      background-color: $color;
+      opacity: var(--state-hover-opacity);
+    }
+  }
+
+  &:focus:enabled {
+    .state {
+      background-color: $color;
+      opacity: var(--state-focus-opacity);
+    }
+  }
+
+  &:target:enabled {
+    .state {
+      background-color: $color;
+      opacity: var(--state-pressed-opacity);
+    }
+  }
+}
+
+@mixin outline {
+  border: var(--outline);
+
+  &:disabled {
+    border-color: rgb(from var(--color-on-surface) r g b / 0.12);
+  }
+}

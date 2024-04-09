@@ -1,5 +1,5 @@
-import { ReactNode } from "react";
 import style from "ui/Button.module.scss";
+import { ICON_CLASS } from "./contants";
 
 type Variant = "filled" | "tonal" | "text" | "elevated" | "outlined";
 
@@ -7,7 +7,7 @@ type Props = {
   children: string;
   disabled?: boolean;
   type?: Variant;
-  icon?: ReactNode;
+  icon?: string;
 };
 
 const variantCx: { [variant in Variant]: keyof typeof style } = {
@@ -25,12 +25,13 @@ export default function Button({
   type = "filled",
 }: Props) {
   const cx = `${style.button} ${variantCx[type]}`;
+  const iconDiv = icon ? <div className={ICON_CLASS}>{icon}</div> : null;
   const shouldRenderIcon = icon || type !== "text";
 
   return (
     <button className={cx} disabled={disabled}>
       <div className={style.state} />
-      {shouldRenderIcon && <span className={style.icon}>{icon}</span>}
+      {shouldRenderIcon && <span className={style.icon}>{iconDiv}</span>}
       <div>{children}</div>
     </button>
   );

@@ -1,7 +1,27 @@
 import { ReactNode } from "react";
 import styles from "ui/IconButton.module.scss";
+import { ICON_CLASS } from "./contants";
 
-type Props = { children: ReactNode };
-export default function TopBar({ children }: Props) {
-  return <div className={styles.root}>{children}</div>;
+type Variant = "filled" | "tonal" | "outlined";
+
+type Props = {
+  disabled?: boolean;
+  type?: Variant;
+  icon?: string;
+};
+
+const variantCx: { [variant in Variant]: keyof typeof styles } = {
+  filled: styles.filled,
+  outlined: styles.outlined,
+  tonal: styles.tonal,
+};
+
+export default function TopBar({ disabled, icon, type = "filled" }: Props) {
+  const cx = `${styles.root} ${variantCx[type]}`;
+  return (
+    <button className={cx} disabled={disabled}>
+      <div className={styles.state}></div>
+      <div className={ICON_CLASS}>{icon}</div>
+    </button>
+  );
 }
