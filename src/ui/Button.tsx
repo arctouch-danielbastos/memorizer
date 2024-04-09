@@ -1,5 +1,6 @@
 import style from "ui/Button.module.scss";
 import { ICON_CLASS } from "./contants";
+import { MaterialIcon } from "@material-design-icons/font";
 
 type Variant = "filled" | "tonal" | "text" | "elevated" | "outlined";
 
@@ -7,7 +8,7 @@ type Props = {
   children: string;
   disabled?: boolean;
   type?: Variant;
-  icon?: string;
+  icon?: MaterialIcon;
 };
 
 const variantCx: { [variant in Variant]: keyof typeof style } = {

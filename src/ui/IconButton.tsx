@@ -1,13 +1,14 @@
 import { ReactNode } from "react";
 import styles from "ui/IconButton.module.scss";
 import { ICON_CLASS } from "./contants";
+import { MaterialIcon } from "@material-design-icons/font";
 
 type Variant = "filled" | "tonal" | "outlined";
 
 type Props = {
   disabled?: boolean;
   type?: Variant;
-  icon?: string;
+  icon?: MaterialIcon;
 };
 
 const variantCx: { [variant in Variant]: keyof typeof styles } = {

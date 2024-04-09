@@ -1,1 +1,1 @@
-export const ICON_CLASS = "material-icons";
+export const ICON_CLASS = "material-icons-outlined";
