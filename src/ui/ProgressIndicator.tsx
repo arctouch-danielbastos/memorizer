@@ -21,7 +21,6 @@ export default function ProgressIndicator({ progress, stop }: Props) {
     >
       <div className={style.active}></div>
       <div className={style.track} />
-      {typeof stop !== "undefined" && <div className="stop" />}
     </div>
   );
 }

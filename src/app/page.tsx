@@ -23,7 +23,7 @@ export default function Memorizer() {
           da n__________.
         </article>
         <div className={style.progress}>
-          <ProgressIndicator progress={30} />
+          <ProgressIndicator progress={35} />
         </div>
         <div className={style.controls}>
           <IconButton icon="skip_previous" />
