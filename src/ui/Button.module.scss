@@ -1,14 +1,6 @@
 @use "./utils/font.scss";
 @use "./utils/button.scss";
 
-@mixin resetButton() {
-  outline: none;
-  border: none;
-  margin: 0;
-  overflow: visible;
-  cursor: pointer;
-}
-
 .button {
   @include font.labelLarge;
   @include button.base;

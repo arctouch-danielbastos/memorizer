@@ -41,3 +41,7 @@
   border-top-left-radius: var(--corner-extra-large);
   border-top-right-radius: var(--corner-extra-large);
 }
+
+@mixin full {
+  border-radius: var(--corner-full);
+}
