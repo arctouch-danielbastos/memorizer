@@ -1,3 +1,5 @@
+@use "../ui/utils/font.scss";
+
 .root {
   display: grid;
   width: 100%;
@@ -7,20 +9,26 @@
 }
 
 .body {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding-bottom: 78px;
-}
-
-.controls {
-  display: flex;
-  gap: 50px;
-  align-items: center;
-  justify-content: center;
-}
-
-.progress {
   display: grid;
+  grid-template-rows: 1fr auto auto;
   padding: 16px;
+  padding-bottom: 78px;
+
+  article {
+    @include font.bodyLarge;
+    line-height: 32px;
+    line-break: anywhere;
+  }
+
+  .controls {
+    display: flex;
+    gap: 50px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .progress {
+    display: grid;
+    padding: 16px;
+  }
 }
