@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import styles from "ui/IconButton.module.scss";
-import { ICON_CLASS } from "./contants";
+import { ICON_CLASS } from "ui/config/contants";
 import { MaterialIcon } from "@material-design-icons/font";
 
 type Variant = "filled" | "tonal" | "outlined";

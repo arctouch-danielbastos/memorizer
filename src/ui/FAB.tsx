@@ -1,5 +1,5 @@
 import style from "ui/Fab.module.scss";
-import { ICON_CLASS } from "./contants";
+import { ICON_CLASS } from "ui/config/contants";
 import { MaterialIcon } from "@material-design-icons/font";
 
 type Variant = "primary" | "secondary" | "tertiary" | "branded" | "surface";
