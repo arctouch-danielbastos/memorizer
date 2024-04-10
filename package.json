@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "@material-design-icons/font": "^0.14.13",
-    "@material-design-icons/svg": "^0.14.13",
     "next": "14.1.4",
     "react": "^18",
     "react-dom": "^18"

@@ -1,0 +1,20 @@
+@use "./utils//shape.scss";
+
+.root {
+  @include shape.full;
+  display: grid;
+  height: 4px;
+  gap: 4px;
+  transition: 100ms ease-in-out;
+}
+
+.track {
+  height: 4px;
+  background-color: var(--color-secondary-container);
+}
+
+.active {
+  @include shape.full;
+  background-color: var(--color-primary);
+  height: 4px;
+}

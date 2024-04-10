@@ -10,21 +10,25 @@
   align-items: center;
 }
 
-.filled {
+.root.standard {
+  @include button.color($color: var(--color-on-surface-variant));
+}
+
+.root.filled {
   @include button.color(
     $background: var(--color-primary),
     $color: var(--color-on-primary)
   );
 }
 
-.tonal {
+.root.tonal {
   @include button.color(
     $background: var(--color-secondary-container),
     $color: var(--color-on-secondary-container)
   );
 }
 
-.outlined {
+.root.outlined {
   @include button.color($color: var(--color-inverse-surface));
   @include button.outline;
 }

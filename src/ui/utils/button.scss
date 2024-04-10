@@ -47,7 +47,7 @@
   &:disabled {
     color: rgb(from var(--color-on-surface) r g b / 0.38);
 
-    @if ($background != transparent) {
+    @if $background != transparent {
       background-color: rgb(from var(--color-on-surface) r g b / 0.12);
     }
   }

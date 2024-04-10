@@ -3,7 +3,7 @@ import styles from "ui/IconButton.module.scss";
 import { ICON_CLASS } from "ui/config/contants";
 import { MaterialIcon } from "@material-design-icons/font";
 
-type Variant = "filled" | "tonal" | "outlined";
+type Variant = "standard" | "filled" | "tonal" | "outlined";
 
 type Props = {
   disabled?: boolean;
@@ -12,12 +12,13 @@ type Props = {
 };
 
 const variantCx: { [variant in Variant]: keyof typeof styles } = {
+  standard: styles.standard,
   filled: styles.filled,
   outlined: styles.outlined,
   tonal: styles.tonal,
 };
 
-export default function TopBar({ disabled, icon, type = "filled" }: Props) {
+export default function TopBar({ disabled, icon, type = "standard" }: Props) {
   const cx = `${styles.root} ${variantCx[type]}`;
   return (
     <button className={cx} disabled={disabled}>
