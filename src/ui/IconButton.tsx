@@ -18,11 +18,14 @@ const variantCx: { [variant in Variant]: keyof typeof styles } = {
   tonal: styles.tonal,
 };
 
-export default function TopBar({ disabled, icon, type = "standard" }: Props) {
+export default function IconButton({
+  disabled,
+  icon,
+  type = "standard",
+}: Props) {
   const cx = `${styles.root} ${variantCx[type]}`;
   return (
     <button className={cx} disabled={disabled}>
-      <div className={styles.state}></div>
       <div className={ICON_CLASS}>{icon}</div>
     </button>
   );

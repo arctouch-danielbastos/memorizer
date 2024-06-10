@@ -8,11 +8,11 @@
 
 @mixin base() {
   @include reset;
-
   position: relative;
   border-radius: var(--corner-full);
 
-  .state {
+  ::after {
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
@@ -53,21 +53,21 @@
   }
 
   &:hover:enabled {
-    .state {
+    ::after {
       background-color: $color;
       opacity: var(--state-hover-opacity);
     }
   }
 
   &:focus:enabled {
-    .state {
+    ::after {
       background-color: $color;
       opacity: var(--state-focus-opacity);
     }
   }
 
   &:target:enabled {
-    .state {
+    ::after {
       background-color: $color;
       opacity: var(--state-pressed-opacity);
     }

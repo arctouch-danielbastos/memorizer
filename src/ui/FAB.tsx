@@ -37,7 +37,6 @@ export default function FAB({
 
   return (
     <button className={cx}>
-      <div className={style.state} />
       <div className={ICON_CLASS}>{icon}</div>
     </button>
   );

@@ -23,7 +23,7 @@
     @include shape.medium;
     font-size: 24px;
 
-    .state {
+    ::after {
       @include shape.medium;
     }
   }
@@ -33,7 +33,7 @@
     @include shape.large;
     font-size: 24px;
 
-    .state {
+    ::after {
       @include shape.large;
     }
   }
@@ -43,7 +43,7 @@
     @include shape.xLarge;
     font-size: 36px;
 
-    .state {
+    ::after {
       @include shape.xLarge;
     }
   }

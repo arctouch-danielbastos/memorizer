@@ -31,7 +31,6 @@ export default function Button({
 
   return (
     <button className={cx} disabled={disabled}>
-      <div className={style.state} />
       {shouldRenderIcon && <span className={style.icon}>{iconDiv}</span>}
       <div>{children}</div>
     </button>
