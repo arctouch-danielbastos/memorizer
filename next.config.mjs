@@ -45,6 +45,7 @@ const svgoConfig = {
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: "export",
   webpack: config => withSvg(config, svgoConfig),
   sassOptions: {
     includePaths: ["./src/"],
