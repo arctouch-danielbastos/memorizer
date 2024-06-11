@@ -10,6 +10,7 @@ type Props = {
   icon: MaterialIcon;
   size?: Size;
   lowered?: boolean;
+  onClick?: () => void;
 };
 
 const variantCx: { [variant in Variant]: keyof typeof style } = {
@@ -31,12 +32,13 @@ export default function FAB({
   lowered = false,
   type = "primary",
   size = "default",
+  onClick,
 }: Props) {
   let cx = `${style.root} ${variantCx[type]} ${sizeCx[size]}`;
   if (lowered) cx += ` ${style.lowered}`;
 
   return (
-    <button className={cx}>
+    <button className={cx} onClick={onClick}>
       <div className={ICON_CLASS}>{icon}</div>
     </button>
   );

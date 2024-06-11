@@ -7,27 +7,3 @@
   grid-template-rows: auto 1fr;
   height: 100vh;
 }
-
-.body {
-  display: grid;
-  grid-template-rows: 1fr auto auto;
-  padding: 16px;
-  padding-bottom: 78px;
-
-  article {
-    @include font.bodyLarge;
-    line-height: 32px;
-  }
-
-  .controls {
-    display: flex;
-    gap: 50px;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .progress {
-    display: grid;
-    padding: 16px;
-  }
-}

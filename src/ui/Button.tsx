@@ -9,6 +9,7 @@ type Props = {
   disabled?: boolean;
   type?: Variant;
   icon?: MaterialIcon;
+  onClick?: () => void;
 };
 
 const variantCx: { [variant in Variant]: keyof typeof style } = {
@@ -24,13 +25,14 @@ export default function Button({
   disabled = false,
   icon,
   type = "filled",
+  onClick,
 }: Props) {
   const cx = `${style.button} ${variantCx[type]}`;
   const iconDiv = icon ? <div className={ICON_CLASS}>{icon}</div> : null;
   const shouldRenderIcon = icon || type !== "text";
 
   return (
-    <button className={cx} disabled={disabled}>
+    <button className={cx} disabled={disabled} onClick={onClick}>
       {shouldRenderIcon && <span className={style.icon}>{iconDiv}</span>}
       <div>{children}</div>
     </button>

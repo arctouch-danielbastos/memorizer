@@ -9,6 +9,7 @@ type Props = {
   disabled?: boolean;
   type?: Variant;
   icon?: MaterialIcon;
+  onClick?: () => void;
 };
 
 const variantCx: { [variant in Variant]: keyof typeof styles } = {
@@ -22,10 +23,11 @@ export default function IconButton({
   disabled,
   icon,
   type = "standard",
+  onClick,
 }: Props) {
   const cx = `${styles.root} ${variantCx[type]}`;
   return (
-    <button className={cx} disabled={disabled}>
+    <button className={cx} disabled={disabled} onClick={onClick}>
       <div className={ICON_CLASS}>{icon}</div>
     </button>
   );
