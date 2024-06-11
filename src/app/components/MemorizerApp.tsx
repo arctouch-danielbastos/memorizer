@@ -59,6 +59,14 @@ export default function MemorizerApp() {
 
   const togglePeek = () => setIsPeeking(is => !is);
 
+  const renderPlay = () => (
+    <FAB type="surface" size="default" icon="play_arrow" onClick={next} />
+  );
+
+  const renderReset = () => (
+    <FAB type="surface" size="default" icon="repeat" onClick={reset} />
+  );
+
   return (
     <main className={style.root}>
       <TopBar
@@ -76,16 +84,7 @@ export default function MemorizerApp() {
         </div>
         <div className={style.controls}>
           <IconButton icon="skip_previous" onClick={undo} />
-          {progress !== 100 ? (
-            <FAB
-              type="surface"
-              size="default"
-              icon="play_arrow"
-              onClick={next}
-            />
-          ) : (
-            <FAB type="surface" size="default" icon="repeat" onClick={reset} />
-          )}
+          {progress !== 100 ? renderPlay() : renderReset()}
           <IconButton icon="remove_red_eye" onClick={togglePeek} />
         </div>
       </div>
