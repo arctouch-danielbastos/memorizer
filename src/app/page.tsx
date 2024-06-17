@@ -1,9 +1,9 @@
-import MemorizerApp from "components/MemorizerApp";
+import App from "components/App";
 
 export default function Memorizer() {
   return (
     <main>
-      <MemorizerApp />
+      <App />
     </main>
   );
 }
