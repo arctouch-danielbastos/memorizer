@@ -1,14 +1,22 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import style from "./style.module.scss";
 import FAB from "ui/FAB";
-import IconButton from "ui/IconButton";
-import ProgressIndicator from "ui/ProgressIndicator";
 import TopBar from "ui/TopBar";
 import showWordStart, { type HideSpec } from "utils/strategy";
 import { getPercentageDone, hidePrevious, revealNext } from "utils/spec";
-import cx from "classnames";
+import {
+  Box,
+  Container,
+  Flex,
+  Grid,
+  IconButton,
+  Progress,
+  Text,
+  defineStyleConfig,
+  useStyleConfig,
+} from "@chakra-ui/react";
+import Icon from "ui/Icon";
 
 const VERSES = [
   "Portanto, visto que temos um grande sumo sacerdote que adentrou os céus, Jesus, o Filho de Deus, apeguemo-nos com toda a firmeza à fé que professamos,",
@@ -22,16 +30,24 @@ const initialState = STRATEGY.obfuscate(VERSES);
 type Part = HideSpec["hiddenForm"][0];
 type Props = { spec: HideSpec; isPeeking: boolean };
 
+const hidden = {
+  color: "transparent",
+  borderBottom: "1px solid",
+  borderBottomColor: "gray.900",
+};
+
 function Word({ spec, isPeeking }: Props) {
-  const getClasses = (part: Part) =>
-    cx({ [style.hidden]: !isPeeking && spec.isHidden && !part.show });
+  const getSx = (part: Part) => {
+    const isHidden = !isPeeking && spec.isHidden && !part.show;
+    return isHidden ? hidden : {};
+  };
 
   return (
-    <span className="word">
+    <span>
       {spec.hiddenForm.map(part => (
-        <span className={getClasses(part)} key={part.letters}>
+        <Box as="span" __css={getSx(part)} key={part.letters}>
           {part.letters}
-        </span>
+        </Box>
       ))}
     </span>
   );
@@ -59,35 +75,51 @@ export default function MemorizerApp() {
 
   const togglePeek = () => setIsPeeking(is => !is);
 
-  const renderPlay = () => (
-    <FAB type="surface" size="default" icon="play_arrow" onClick={next} />
-  );
-
-  const renderReset = () => (
-    <FAB type="surface" size="default" icon="repeat" onClick={reset} />
-  );
+  const renderPlay = () => <FAB icon="play_arrow" onClick={next} />;
+  const renderReset = () => <FAB icon="repeat" onClick={reset} />;
 
   return (
-    <main className={style.root}>
+    <Grid h="full" templateRows="auto 1fr auto auto">
       <TopBar
         title="Hebreus 4:14-16"
-        right={<IconButton type="tonal" icon="book" />}
+        right={
+          <IconButton
+            isRound={true}
+            aria-label=""
+            icon={<Icon name="book" />}
+          />
+        }
       />
-      <div className={style.body}>
-        <article>
-          {words.map(i => (
-            <Word key={i.raw} isPeeking={isPeeking} spec={i} />
-          ))}
-        </article>
-        <div className={style.progress}>
-          <ProgressIndicator progress={progress} />
-        </div>
-        <div className={style.controls}>
-          <IconButton icon="skip_previous" onClick={undo} />
-          {progress !== 100 ? renderPlay() : renderReset()}
-          <IconButton icon="remove_red_eye" onClick={togglePeek} />
-        </div>
-      </div>
-    </main>
+
+      <Text
+        display="flex"
+        fontSize="lg"
+        flexWrap="wrap"
+        p={5}
+        gap={1}
+        as="article"
+      >
+        {words.map(i => (
+          <Word key={i.raw} isPeeking={isPeeking} spec={i} />
+        ))}
+      </Text>
+
+      <Container>
+        <Progress colorScheme="purple" size="xs" value={progress} />
+      </Container>
+      <Flex py={12} align="center" justify="center" gap={10}>
+        <IconButton
+          aria-label=""
+          icon={<Icon name="skip_previous" />}
+          onClick={undo}
+        />
+        {progress !== 100 ? renderPlay() : renderReset()}
+        <IconButton
+          aria-label=""
+          icon={<Icon name="remove_red_eye" />}
+          onClick={togglePeek}
+        />
+      </Flex>
+    </Grid>
   );
 }

@@ -1,9 +1,0 @@
-@use "ui/utils/font.scss";
-
-.root {
-  display: grid;
-  width: 100%;
-  gap: 20px;
-  grid-template-rows: auto 1fr;
-  height: 100vh;
-}

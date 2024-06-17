@@ -1,45 +1,22 @@
-import style from "ui/Fab.module.scss";
-import { ICON_CLASS } from "ui/config/contants";
-import { MaterialIcon } from "@material-design-icons/font";
-
-type Variant = "primary" | "secondary" | "tertiary" | "branded" | "surface";
-type Size = "small" | "default" | "large";
+import Icon from "ui/Icon";
+import {
+  Button,
+  defineStyle,
+  defineStyleConfig,
+  extendBaseTheme,
+} from "@chakra-ui/react";
+import type { MaterialIcon } from "@material-design-icons/font";
+import type { MouseEventHandler } from "react";
 
 type Props = {
-  type?: Variant;
   icon: MaterialIcon;
-  size?: Size;
-  lowered?: boolean;
-  onClick?: () => void;
+  onClick?: MouseEventHandler<HTMLButtonElement>;
 };
 
-const variantCx: { [variant in Variant]: keyof typeof style } = {
-  primary: style.primary,
-  secondary: style.secondary,
-  tertiary: style.tertiary,
-  branded: style.branded,
-  surface: style.surface,
-};
-
-const sizeCx: { [variant in Size]: keyof typeof style } = {
-  small: style.small,
-  default: style.default,
-  large: style.large,
-};
-
-export default function FAB({
-  icon,
-  lowered = false,
-  type = "primary",
-  size = "default",
-  onClick,
-}: Props) {
-  let cx = `${style.root} ${variantCx[type]} ${sizeCx[size]}`;
-  if (lowered) cx += ` ${style.lowered}`;
-
+export default function FAB({ icon, onClick }: Props) {
   return (
-    <button className={cx} onClick={onClick}>
-      <div className={ICON_CLASS}>{icon}</div>
-    </button>
+    <Button size="xl" colorScheme="purple" onClick={onClick}>
+      <Icon name={icon} />
+    </Button>
   );
 }

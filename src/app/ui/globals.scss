@@ -1,24 +1,7 @@
-:root {
-  --outline: 1px solid var(--color-outline);
-}
-
-* {
-  font-family: var(--font-roboto);
-}
-
-html {
-  color: var(--color-on-background);
-  background-color: var(--color-surface-container-lowest);
-}
-
-body {
-  margin: 0;
-}
-
-svg {
-  width: 1em;
-  height: 1em;
-  fill: currentColor;
+body,
+html,
+main {
+  height: 100%;
 }
 
 .material-icons-outlined {

@@ -1,14 +1,13 @@
-import { Roboto } from "next/font/google";
+import { Rubik } from "next/font/google";
 import localFont from "next/font/local";
 import "ui/globals.scss";
-import "ui/config/index.scss";
 import { ReactNode } from "react";
 import { Metadata } from "next";
+import { Providers } from "Providers";
 
-const font = Roboto({
-  weight: ["400", "500"],
+const font = Rubik({
   subsets: ["latin"],
-  variable: "--font-roboto",
+  variable: "--font-rubik",
 });
 
 const icons = localFont({
@@ -24,7 +23,9 @@ type Props = { children: ReactNode };
 export default function RootLayout({ children }: Props) {
   return (
     <html className={`${font.variable} ${icons.variable}`}>
-      <body>{children}</body>
+      <body>
+        <Providers>{children}</Providers>
+      </body>
     </html>
   );
 }
