@@ -1,13 +1,6 @@
 import type { HideSpec } from "utils/strategy";
-import {
-  Box,
-  Text,
-  createMultiStyleConfigHelpers,
-  defineStyle,
-  defineStyleConfig,
-  useId,
-  useStyleConfig,
-} from "@chakra-ui/react";
+import { Box, Text, defineStyleConfig } from "@chakra-ui/react";
+import sx from "utils/sx";
 
 type Part = HideSpec["hiddenForm"][0];
 
@@ -35,10 +28,7 @@ const wrapperStyle = defineStyleConfig({
 
 type SegmentProp = { part: Part; isHidden: boolean };
 function Segment({ part, isHidden }: SegmentProp) {
-  const style = useStyleConfig(useId(), {
-    styleConfig: wordStyle,
-    variant: isHidden && !part.show ? "hidden" : "",
-  });
+  const style = sx(wordStyle, { hidden: isHidden && !part.show });
 
   return (
     <Box as="span" sx={style}>
@@ -65,9 +55,8 @@ function Word({ spec, isPeeking }: WordProp) {
 type Props = { words: HideSpec[]; isPeeking: boolean };
 
 export default function VerseText({ isPeeking, words }: Props) {
-  const style = useStyleConfig(useId(), { styleConfig: wrapperStyle });
   return (
-    <Text sx={style} as="article">
+    <Text sx={sx(wrapperStyle)} as="article">
       {words.map(i => (
         <Word key={i.raw} isPeeking={isPeeking} spec={i} />
       ))}
