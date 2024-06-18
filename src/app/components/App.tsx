@@ -3,10 +3,11 @@
 import { useMemo, useState } from "react";
 import showWordStart from "utils/strategy";
 import { getPercentageDone, hidePrevious, revealNext } from "utils/spec";
-import { Container, Grid, Progress } from "@chakra-ui/react";
+import { Container, Grid, Progress, useDisclosure } from "@chakra-ui/react";
 import ButtonSection from "components/ButtonSection";
 import TopBar from "components/TopBar";
 import VerseText from "components/VerseText";
+import VersePicker from "picker";
 
 const VERSES = [
   "Portanto, visto que temos um grande sumo sacerdote que adentrou os céus, Jesus, o Filho de Deus, apeguemo-nos com toda a firmeza à fé que professamos,",
@@ -20,6 +21,8 @@ const initialState = STRATEGY.obfuscate(VERSES);
 export default function MemorizerApp() {
   const [words, setWords] = useState(initialState);
   const [isPeeking, setIsPeeking] = useState(false);
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   const progress = useMemo(
     () => getPercentageDone(words, STRATEGY.canBeHidden),
     [words]
@@ -37,7 +40,7 @@ export default function MemorizerApp() {
 
   return (
     <Grid h="full" templateRows="auto 1fr auto auto">
-      <TopBar title="Hebreus 4:14-16" />
+      <TopBar onClickIcon={onOpen} title="Hebreus 4:14-16" />
 
       <VerseText words={words} isPeeking={isPeeking} />
       <Container>
@@ -50,6 +53,7 @@ export default function MemorizerApp() {
         onClickUndo={undo}
         progress={progress}
       />
+      <VersePicker isOpen={isOpen} onClose={onClose} />
     </Grid>
   );
 }
