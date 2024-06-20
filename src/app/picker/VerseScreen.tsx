@@ -7,6 +7,7 @@ import {
   SimpleGrid,
 } from "@chakra-ui/react";
 import { range } from "lodash";
+import { useNavigate } from "picker/utils/navigations";
 
 function RangePicker() {
   return (
@@ -21,6 +22,7 @@ function RangePicker() {
 }
 
 export default function VerseScreen() {
+  const navigate = useNavigate();
   return (
     <div>
       <DrawerHeader pt={6}>Capítulo 14</DrawerHeader>
@@ -29,7 +31,11 @@ export default function VerseScreen() {
       </DrawerBody>
       <DrawerFooter display="flex" gap={5} pb={6}>
         <Button variant="link">Cancelar</Button>
-        <Button variant="outline" colorScheme="purple">
+        <Button
+          variant="outline"
+          colorScheme="purple"
+          onClick={() => navigate("chapter")}
+        >
           Voltar
         </Button>
       </DrawerFooter>

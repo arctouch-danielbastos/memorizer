@@ -7,8 +7,10 @@ import {
   UnorderedList,
 } from "@chakra-ui/react";
 import { range } from "lodash";
+import { useNavigate } from "picker/utils/navigations";
 
 export default function ChapterScreen() {
+  const navigate = useNavigate();
   return (
     <div>
       <DrawerHeader pt={6}>Hebreus</DrawerHeader>
@@ -23,7 +25,11 @@ export default function ChapterScreen() {
       </DrawerBody>
       <DrawerFooter display="flex" gap={5} pb={6}>
         <Button variant="link">Cancelar</Button>
-        <Button variant="outline" colorScheme="purple">
+        <Button
+          variant="outline"
+          colorScheme="purple"
+          onClick={() => navigate("book")}
+        >
           Voltar
         </Button>
       </DrawerFooter>

@@ -6,9 +6,11 @@ import {
   ListItem,
   UnorderedList,
 } from "@chakra-ui/react";
+import { useNavigate } from "picker/utils/navigations";
 import { useState } from "react";
 
 export default function BookScreen() {
+  const navigate = useNavigate();
   const [books] = useState([
     "Mateus",
     "Marcos",
@@ -36,7 +38,11 @@ export default function BookScreen() {
       </DrawerBody>
       <DrawerFooter display="flex" gap={5} pb={6}>
         <Button variant="link">Cancelar</Button>
-        <Button variant="outline" colorScheme="purple">
+        <Button
+          variant="outline"
+          colorScheme="purple"
+          onClick={() => navigate("main")}
+        >
           Voltar
         </Button>
       </DrawerFooter>
