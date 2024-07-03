@@ -30,11 +30,14 @@ export default function VerseScreen() {
         <RangePicker />
       </DrawerBody>
       <DrawerFooter display="flex" gap={5} pb={6}>
-        <Button variant="link">Cancelar</Button>
+        <Button onClick={() => navigate("main")} variant="link">
+          Voltar
+        </Button>
         <Button
           variant="outline"
+          isDisabled={true}
           colorScheme="purple"
-          onClick={() => navigate("chapter")}
+          onClick={() => navigate("main")}
         >
           Voltar
         </Button>

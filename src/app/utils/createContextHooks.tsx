@@ -4,7 +4,6 @@ import {
   useContext,
   useState,
   type Dispatch,
-  type Provider,
   type SetStateAction,
 } from "react";
 
