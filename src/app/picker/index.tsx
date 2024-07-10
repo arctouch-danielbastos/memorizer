@@ -3,19 +3,26 @@ import BookScreen from "picker/BookScreen";
 import ChapterScreen from "picker/ChapterScreen";
 import MainScreen from "picker/MainScreen";
 import VerseScreen from "picker/VerseScreen";
-import { useCurrentScreen, withNavigation } from "picker/utils/navigations";
+import {
+  useCurrentScreen,
+  useNavigateForward,
+  withNavigation,
+  type Screen,
+} from "picker/utils/navigations";
 import { useState } from "react";
-import createContextHooks from "utils/createContextHooks";
-
-type Screen = "main" | "book" | "verse" | "chapter";
+import { State } from "types";
 
 type Props = { isOpen: boolean; onClose: () => void };
 function VersePicker({ isOpen, onClose }: Props) {
-  const [state] = useState({
+  const [state, setState] = useState<State>({
     verses: [1, 10],
     chapter: 1,
-    book: "Hebreus",
+    book: "hb" as string | null,
   });
+
+  const onChange = (change: Partial<State>) => {
+    setState(state => ({ ...state, ...change }));
+  };
 
   const screen = useCurrentScreen();
 
@@ -24,9 +31,14 @@ function VersePicker({ isOpen, onClose }: Props) {
       <DrawerOverlay />
       <DrawerContent>
         {screen === "main" && (
-          <MainScreen onCancel={onClose} onSave={onClose} />
+          <MainScreen state={state} onCancel={onClose} onSave={onClose} />
         )}
-        {screen === "book" && <BookScreen />}
+        {screen === "book" && (
+          <BookScreen
+            bookId={state.book}
+            onChoose={book => onChange({ book })}
+          />
+        )}
         {screen === "chapter" && <ChapterScreen />}
         {screen === "verse" && <VerseScreen />}
       </DrawerContent>

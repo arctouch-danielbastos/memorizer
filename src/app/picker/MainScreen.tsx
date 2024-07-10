@@ -5,19 +5,15 @@ import {
   DrawerHeader,
   Grid,
 } from "@chakra-ui/react";
+import nvi from "data/nvi";
 import VersePart from "picker/VersePart";
 import { useNavigate } from "picker/utils/navigations";
-import { useState } from "react";
+import { State } from "types";
 
-type Props = { onCancel: () => void; onSave: () => void };
-export default function MainScreen({ onCancel, onSave }: Props) {
+type Props = { onCancel: () => void; state: State; onSave: () => void };
+export default function MainScreen({ state, onCancel, onSave }: Props) {
   const navigate = useNavigate();
-
-  const [state] = useState({
-    verses: [1, 10],
-    chapter: 1,
-    book: "Hebreus",
-  });
+  const book = nvi.find(b => b.abbrev === state.book)?.name as string;
 
   return (
     <div>
@@ -27,7 +23,7 @@ export default function MainScreen({ onCancel, onSave }: Props) {
           <VersePart
             full
             label="Livro"
-            value={state.book}
+            value={book}
             onChoose={() => navigate("book")}
           />
           <VersePart

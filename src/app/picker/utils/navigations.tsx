@@ -1,6 +1,6 @@
 import createContextHooks from "utils/createContextHooks";
 
-type Screen = "main" | "book" | "verse" | "chapter";
+export type Screen = "main" | "book" | "verse" | "chapter";
 
 export const {
   Provider: NavigationProvider,
@@ -9,11 +9,14 @@ export const {
 } = createContextHooks<Screen>("main");
 
 const screenOrder: Screen[] = ["book", "chapter", "verse"];
-export function useNavigateForward({ current }: { current: Screen }) {
+
+export function useNavigateForward() {
   const navigate = useNavigate();
-  const currentIndex = screenOrder.indexOf(current);
-  if (currentIndex < 0) return;
-  navigate(screenOrder[currentIndex + 1]);
+  return (current: Screen) => {
+    const currentIndex = screenOrder.indexOf(current);
+    if (currentIndex < 0) return;
+    navigate(screenOrder[currentIndex + 1]);
+  };
 }
 
 export function withNavigation<T extends {}>(
