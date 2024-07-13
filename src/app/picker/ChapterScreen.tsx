@@ -5,19 +5,56 @@ import {
   DrawerHeader,
   ListItem,
   UnorderedList,
+  defineStyleConfig,
 } from "@chakra-ui/react";
+import nvi from "data/nvi";
 import { range } from "lodash";
-import { useNavigate } from "picker/utils/navigations";
+import nullthrows from "nullthrows";
+import { useNavigate, useNavigateForward } from "picker/utils/navigations";
+import type { State } from "types";
+import sx from "utils/sx";
 
-export default function ChapterScreen() {
+const listStyle = defineStyleConfig({
+  baseStyle: {
+    cursor: "pointer",
+    fontSize: "larger",
+    py: "3",
+    my: "0 !important",
+    _hover: {
+      bg: 'gray.50'
+    },
+  },
+  variants: {
+    selected: {
+      bg: 'gray.100'
+    }
+  }
+});
+
+type Props = {
+  onChoose: (state: State["chapter"] | null) => void;
+  state: State;
+};
+
+export default function ChapterScreen({ onChoose, state }: Props) {
+  const { chapter, book } = state;
   const navigate = useNavigate();
+  const navigateForward = useNavigateForward();
+
+  const chapterList = nvi.find(it => it.abbrev === book)?.chapters;
+  const chapterCount = nullthrows(chapterList).length;
+  const select = (id: State["chapter"]) => {
+    console.log('=== select', id);
+    onChoose(chapter === id ? null : id);
+  };
+
   return (
     <div>
       <DrawerHeader pt={6}>Hebreus</DrawerHeader>
       <DrawerBody maxH={80}>
         <UnorderedList spacing={4} styleType="none">
-          {range(1, 13).map(num => (
-            <ListItem fontSize="larger" key={num}>
+          {range(1, chapterCount + 1).map(num => (
+            <ListItem key={num} sx={sx(listStyle, { selected: chapter === num })} onClick={() => select(num)}>
               Capítulo {num}
             </ListItem>
           ))}
@@ -29,11 +66,11 @@ export default function ChapterScreen() {
         </Button>
         <Button
           variant="outline"
-          isDisabled={true}
+          isDisabled={!chapter}
           colorScheme="purple"
-          onClick={() => navigate("main")}
+          onClick={() => navigateForward("chapter")}
         >
-          Voltar
+          Próximo
         </Button>
       </DrawerFooter>
     </div>

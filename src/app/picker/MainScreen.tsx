@@ -15,6 +15,11 @@ export default function MainScreen({ state, onCancel, onSave }: Props) {
   const navigate = useNavigate();
   const book = nvi.find(b => b.abbrev === state.book)?.name as string;
 
+  const formatVerses = (verses: State["verses"]) => {
+    if (!verses) return '';
+    return verses.join(' ao ');
+  }
+
   return (
     <div>
       <DrawerHeader pt={6}>Escolher passagem</DrawerHeader>
@@ -29,12 +34,12 @@ export default function MainScreen({ state, onCancel, onSave }: Props) {
           <VersePart
             label="Capítulo"
             onChoose={() => navigate("chapter")}
-            value={`${state.chapter}`}
+            value={`${state.chapter ?? ''}`}
           />
           <VersePart
             label="Versículo"
             onChoose={() => navigate("verse")}
-            value={`${state.verses[0]} ao ${state.verses[1]}`}
+            value={formatVerses(state.verses)}
           />
         </Grid>
       </DrawerBody>

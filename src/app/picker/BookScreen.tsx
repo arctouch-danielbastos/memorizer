@@ -7,13 +7,12 @@ import {
   UnorderedList,
   defineStyleConfig,
 } from "@chakra-ui/react";
-import { useNavigate, useNavigateForward } from "picker/utils/navigations";
+import { useNavigateForward } from "picker/utils/navigations";
 import nvi from "data/nvi";
 import sx from "utils/sx";
 import nullthrows from "nullthrows";
 import type { State } from "types";
 
-type Book = { name: string; id: string };
 const books = nvi.map(i => ({
   name: i.name,
   id: i.abbrev,
@@ -39,15 +38,16 @@ const itemStyle = defineStyleConfig({
 });
 
 type Props = {
-  onChoose: (bookId: Book["id"] | null) => void;
-  bookId: State["book"] | null;
+  onChoose: (book: State["book"] | null) => void;
+  state: State;
 };
 
-export default function BookScreen({ onChoose, bookId }: Props) {
+export default function BookScreen({ onChoose, state }: Props) {
+  const { book } = state;
   const navigateForward = useNavigateForward();
 
   const toggle = (id: string) => {
-    onChoose(id === bookId ? null : id);
+    onChoose(id === book ? null : id);
   };
 
   return (
@@ -55,25 +55,25 @@ export default function BookScreen({ onChoose, bookId }: Props) {
       <DrawerHeader pt={6}>Escolher livro</DrawerHeader>
       <DrawerBody maxH={80}>
         <UnorderedList spacing={4} sx={listStyle} styleType="none">
-          {books.map(book => (
+          {books.map(cur => (
             <ListItem
-              sx={sx(itemStyle, { selected: bookId === book.id })}
-              onClick={() => toggle(book.id)}
+              sx={sx(itemStyle, { selected: book === cur.id })}
+              onClick={() => toggle(cur.id)}
               fontSize="larger"
-              key={book.id}
+              key={cur.id}
             >
-              {book.name}
+              {cur.name}
             </ListItem>
           ))}
         </UnorderedList>
       </DrawerBody>
       <DrawerFooter display="flex" gap={5} pb={6}>
-        <Button onClick={() => onChoose(nullthrows(bookId))} variant="link">
+        <Button onClick={() => onChoose(nullthrows(book))} variant="link">
           Voltar
         </Button>
         <Button
           variant="outline"
-          isDisabled={bookId === null}
+          isDisabled={book === null}
           colorScheme="purple"
           onClick={() => navigateForward("book")}
         >

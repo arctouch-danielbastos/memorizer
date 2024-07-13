@@ -8,7 +8,7 @@ export const {
   useSetValue: useNavigate,
 } = createContextHooks<Screen>("main");
 
-const screenOrder: Screen[] = ["book", "chapter", "verse"];
+const screenOrder: Screen[] = ["book", "chapter", "verse", "main"];
 
 export function useNavigateForward() {
   const navigate = useNavigate();

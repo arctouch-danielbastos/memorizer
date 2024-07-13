@@ -5,11 +5,9 @@ import MainScreen from "picker/MainScreen";
 import VerseScreen from "picker/VerseScreen";
 import {
   useCurrentScreen,
-  useNavigateForward,
   withNavigation,
-  type Screen,
 } from "picker/utils/navigations";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { State } from "types";
 
 type Props = { isOpen: boolean; onClose: () => void };
@@ -19,6 +17,10 @@ function VersePicker({ isOpen, onClose }: Props) {
     chapter: 1,
     book: "hb" as string | null,
   });
+
+  useEffect(() => {
+    console.log('=== state', JSON.stringify(state));
+  }, [state]);
 
   const onChange = (change: Partial<State>) => {
     setState(state => ({ ...state, ...change }));
@@ -35,12 +37,14 @@ function VersePicker({ isOpen, onClose }: Props) {
         )}
         {screen === "book" && (
           <BookScreen
-            bookId={state.book}
+            state={state}
             onChoose={book => onChange({ book })}
           />
         )}
-        {screen === "chapter" && <ChapterScreen />}
-        {screen === "verse" && <VerseScreen />}
+        {screen === "chapter" && (
+          <ChapterScreen state={state} onChoose={chapter => onChange({ chapter })} />
+        )}
+        {screen === "verse" && <VerseScreen state={state} onChoose={verses => onChange({ verses })} />}
       </DrawerContent>
     </Drawer>
   );
