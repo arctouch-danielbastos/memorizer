@@ -7,12 +7,11 @@ import {
   UnorderedList,
   defineStyleConfig,
 } from "@chakra-ui/react";
-import nvi from "data/nvi";
 import { range } from "lodash";
-import nullthrows from "nullthrows";
 import { useNavigate, useNavigateForward } from "picker/utils/navigations";
 import type { State } from "types";
 import sx from "utils/sx";
+import { getMaxChapterCount } from "./utils/data";
 
 const listStyle = defineStyleConfig({
   baseStyle: {
@@ -37,14 +36,11 @@ type Props = {
 };
 
 export default function ChapterScreen({ onChoose, state }: Props) {
-  const { chapter, book } = state;
+  const { chapter } = state;
   const navigate = useNavigate();
   const navigateForward = useNavigateForward();
 
-  const chapterList = nvi.find(it => it.abbrev === book)?.chapters;
-  const chapterCount = nullthrows(chapterList).length;
   const select = (id: State["chapter"]) => {
-    console.log('=== select', id);
     onChoose(chapter === id ? null : id);
   };
 
@@ -53,7 +49,7 @@ export default function ChapterScreen({ onChoose, state }: Props) {
       <DrawerHeader pt={6}>Hebreus</DrawerHeader>
       <DrawerBody maxH={80}>
         <UnorderedList spacing={4} styleType="none">
-          {range(1, chapterCount + 1).map(num => (
+          {range(1, getMaxChapterCount(state) + 1).map(num => (
             <ListItem key={num} sx={sx(listStyle, { selected: chapter === num })} onClick={() => select(num)}>
               Capítulo {num}
             </ListItem>

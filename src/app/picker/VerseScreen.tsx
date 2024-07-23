@@ -11,6 +11,7 @@ import { range } from "lodash";
 import sx from "utils/sx";
 import { useNavigate, useNavigateForward } from "picker/utils/navigations";
 import { State } from "types";
+import { getMaxVerseCount } from "./utils/data";
 
 const verseStyle = defineStyleConfig({
   baseStyle: {
@@ -32,9 +33,11 @@ const verseStyle = defineStyleConfig({
   },
 });
 
-type PickerProps = { verses: State["verses"]; onClick: (verse: number) => void };
+type PickerProps = { state: State; onClick: (verse: number) => void };
 
-function RangePicker({ onClick, verses }: PickerProps) {
+function RangePicker({ onClick, state }: PickerProps) {
+  const { verses } = state;
+
   const isSelected = (i: number) => {
     if (verses === null) return false;
     if (verses.length === 0) return false;
@@ -55,7 +58,7 @@ function RangePicker({ onClick, verses }: PickerProps) {
 
   return (
     <SimpleGrid justifyContent="center" bg="purple.50" py={6} px={3} borderRadius="md" columns={7}>
-      {range(0, 33).map(num => (
+      {range(0, getMaxVerseCount(state)).map(num => (
         <Center sx={sx(verseStyle, { selected: isSelected(num), start: isStart(num), end: isEnd(num) })} onClick={() => onClick(num)} key={num}>
           {num}
         </Center>
@@ -82,7 +85,7 @@ export default function VerseScreen({ onChoose, state }: Props) {
     <div>
       <DrawerHeader pt={6}>Capítulo 14</DrawerHeader>
       <DrawerBody maxH={80}>
-        <RangePicker verses={verses} onClick={select} />
+        <RangePicker state={state} onClick={select} />
       </DrawerBody>
       <DrawerFooter display="flex" gap={5} pb={6}>
         <Button onClick={() => navigate("main")} variant="link">

@@ -56,9 +56,7 @@ export default function BookScreen({ onChoose, state }: Props) {
       <DrawerBody maxH={80}>
         <UnorderedList spacing={4} sx={listStyle} styleType="none">
           {books.map(cur => (
-            <ListItem
-              sx={sx(itemStyle, { selected: book === cur.id })}
-              onClick={() => toggle(cur.id)}
+            <ListItem sx={sx(itemStyle, { selected: book === cur.id })} onClick={() => toggle(cur.id)}
               fontSize="larger"
               key={cur.id}
             >
