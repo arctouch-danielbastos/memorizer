@@ -10,8 +10,13 @@ import {
 import { useEffect, useState } from "react";
 import { VerseReference } from "types";
 
-type Props = { isOpen: boolean; onClose: () => void };
-function VersePicker({ isOpen, onClose }: Props) {
+type Props = {
+  isOpen: boolean;
+  onClose: () => void;
+  onSave: (referece: VerseReference) => void
+};
+
+function VersePicker({ isOpen, onClose, onSave}: Props) {
   const [state, setState] = useState<VerseReference>({
     verses: [1, 10],
     chapter: 1,
@@ -33,7 +38,7 @@ function VersePicker({ isOpen, onClose }: Props) {
       <DrawerOverlay />
       <DrawerContent>
         {screen === "main" && (
-          <MainScreen state={state} onCancel={onClose} onSave={onClose} />
+          <MainScreen state={state} onCancel={onClose} onSave={onSave} />
         )}
         {screen === "book" && (
           <BookScreen

@@ -8,6 +8,9 @@ import ButtonSection from "components/ButtonSection";
 import TopBar from "components/TopBar";
 import VerseText from "components/VerseText";
 import VersePicker from "picker";
+import type { VerseReference } from "types";
+import nvi from "data/nvi";
+import { getVerseText } from "picker/utils/data";
 
 const VERSES = [
   "Portanto, visto que temos um grande sumo sacerdote que adentrou os céus, Jesus, o Filho de Deus, apeguemo-nos com toda a firmeza à fé que professamos,",
@@ -22,6 +25,12 @@ export default function MemorizerApp() {
   const [words, setWords] = useState(initialState);
   const [isPeeking, setIsPeeking] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const onChangeVerse = (reference: VerseReference) => {
+    onClose();
+    const text = getVerseText(reference);
+    setWords(STRATEGY.obfuscate(text));
+  }
 
   const progress = useMemo(
     () => getPercentageDone(words, STRATEGY.canBeHidden),
@@ -53,7 +62,7 @@ export default function MemorizerApp() {
         onClickUndo={undo}
         progress={progress}
       />
-      <VersePicker isOpen={isOpen} onClose={onClose} />
+      <VersePicker isOpen={isOpen} onClose={onClose} onSave={onChangeVerse} />
     </Grid>
   );
 }

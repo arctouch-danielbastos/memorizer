@@ -11,11 +11,13 @@ import { isValidReference } from "picker/utils/data";
 import { useNavigate } from "picker/utils/navigations";
 import { VerseReference } from "types";
 
-type Props = { onCancel: () => void; state: VerseReference; onSave: () => void };
+type Props = { onCancel: () => void; state: VerseReference; onSave: (referece: VerseReference) => void };
 
 export default function MainScreen({ state, onCancel, onSave }: Props) {
   const navigate = useNavigate();
   const book = nvi.find(b => b.abbrev === state.book)?.name as string;
+
+  const handleSave = () => onSave(state);
 
   const formatVerses = (verses: VerseReference["verses"]) => {
     if (!verses) return '';
@@ -51,7 +53,7 @@ export default function MainScreen({ state, onCancel, onSave }: Props) {
         <Button variant="link" onClick={onCancel}>
           Cancelar
         </Button>
-        <Button colorScheme="purple" disabled={!isValidReference(state)} onClick={onSave}>
+        <Button colorScheme="purple" disabled={!isValidReference(state)} onClick={handleSave}>
           Decorar
         </Button>
       </DrawerFooter>
