@@ -10,7 +10,7 @@ import {
 import { range } from "lodash";
 import sx from "utils/sx";
 import { useNavigate, useNavigateForward } from "picker/utils/navigations";
-import { State } from "types";
+import { VerseReference } from "types";
 import { getMaxVerseCount } from "./utils/data";
 
 const verseStyle = defineStyleConfig({
@@ -33,7 +33,7 @@ const verseStyle = defineStyleConfig({
   },
 });
 
-type PickerProps = { state: State; onClick: (verse: number) => void };
+type PickerProps = { state: VerseReference; onClick: (verse: number) => void };
 
 function RangePicker({ onClick, state }: PickerProps) {
   const { verses } = state;
@@ -68,8 +68,8 @@ function RangePicker({ onClick, state }: PickerProps) {
 }
 
 type Props = {
-  onChoose: (state: State["verses"] | null) => void;
-  state: State;
+  onChoose: (state: VerseReference["verses"] | null) => void;
+  state: VerseReference;
 };
 
 export default function VerseScreen({ onChoose, state }: Props) {

@@ -10,7 +10,7 @@ import {
 import { useNavigate, useNavigateForward } from "picker/utils/navigations";
 import nvi from "data/nvi";
 import sx from "utils/sx";
-import type { State } from "types";
+import type { VerseReference } from "types";
 
 const books = nvi.map(i => ({
   name: i.name,
@@ -37,8 +37,8 @@ const itemStyle = defineStyleConfig({
 });
 
 type Props = {
-  onChoose: (book: State["book"] | null) => void;
-  state: State;
+  onChoose: (book: VerseReference["book"] | null) => void;
+  state: VerseReference;
 };
 
 export default function BookScreen({ onChoose, state }: Props) {

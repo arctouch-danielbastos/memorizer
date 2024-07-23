@@ -8,11 +8,11 @@ import {
   withNavigation,
 } from "picker/utils/navigations";
 import { useEffect, useState } from "react";
-import { State } from "types";
+import { VerseReference } from "types";
 
 type Props = { isOpen: boolean; onClose: () => void };
 function VersePicker({ isOpen, onClose }: Props) {
-  const [state, setState] = useState<State>({
+  const [state, setState] = useState<VerseReference>({
     verses: [1, 10],
     chapter: 1,
     book: "hb" as string | null,
@@ -22,7 +22,7 @@ function VersePicker({ isOpen, onClose }: Props) {
     console.log('=== state', JSON.stringify(state));
   }, [state]);
 
-  const onChange = (change: Partial<State>) => {
+  const onChange = (change: Partial<VerseReference>) => {
     setState(state => ({ ...state, ...change }));
   };
 

@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react";
 import { range } from "lodash";
 import { useNavigate, useNavigateForward } from "picker/utils/navigations";
-import type { State } from "types";
+import type { VerseReference } from "types";
 import sx from "utils/sx";
 import { getMaxChapterCount } from "./utils/data";
 
@@ -31,8 +31,8 @@ const listStyle = defineStyleConfig({
 });
 
 type Props = {
-  onChoose: (state: State["chapter"] | null) => void;
-  state: State;
+  onChoose: (state: VerseReference["chapter"] | null) => void;
+  state: VerseReference;
 };
 
 export default function ChapterScreen({ onChoose, state }: Props) {
@@ -40,7 +40,7 @@ export default function ChapterScreen({ onChoose, state }: Props) {
   const navigate = useNavigate();
   const navigateForward = useNavigateForward();
 
-  const select = (id: State["chapter"]) => {
+  const select = (id: VerseReference["chapter"]) => {
     onChoose(chapter === id ? null : id);
   };
 
