@@ -18,4 +18,9 @@ export function getMaxChapterCount(state: State) {
 	return getChapterList(state).length;
 }
 
-
+export function isValidReference(state: State) {
+	if (!state.book) return false;
+	if (typeof state.chapter !== 'number') return false;
+	if (!Array.isArray(state.verses) || state.verses.length === 0) return false;
+	return true;
+}

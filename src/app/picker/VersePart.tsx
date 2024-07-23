@@ -8,6 +8,7 @@ const Wrapper = defineStyleConfig({
 });
 
 type Props = {
+  disabled?: boolean;
   full?: boolean;
   label: string;
   onChoose?: () => void;
@@ -15,6 +16,7 @@ type Props = {
 };
 
 export default function VersePart({
+  disabled = false,
   full = false,
   onChoose,
   label,
@@ -25,6 +27,7 @@ export default function VersePart({
       <Text size="md">{label}</Text>
       <Input
         colorScheme="purple"
+        disabled={disabled}
         onClick={onChoose}
         variant="filled"
         size="lg"

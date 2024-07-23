@@ -7,10 +7,9 @@ import {
   UnorderedList,
   defineStyleConfig,
 } from "@chakra-ui/react";
-import { useNavigateForward } from "picker/utils/navigations";
+import { useNavigate, useNavigateForward } from "picker/utils/navigations";
 import nvi from "data/nvi";
 import sx from "utils/sx";
-import nullthrows from "nullthrows";
 import type { State } from "types";
 
 const books = nvi.map(i => ({
@@ -44,6 +43,7 @@ type Props = {
 
 export default function BookScreen({ onChoose, state }: Props) {
   const { book } = state;
+  const navigate = useNavigate();
   const navigateForward = useNavigateForward();
 
   const toggle = (id: string) => {
@@ -66,7 +66,7 @@ export default function BookScreen({ onChoose, state }: Props) {
         </UnorderedList>
       </DrawerBody>
       <DrawerFooter display="flex" gap={5} pb={6}>
-        <Button onClick={() => onChoose(nullthrows(book))} variant="link">
+        <Button onClick={() => navigate('main')} variant="link">
           Voltar
         </Button>
         <Button

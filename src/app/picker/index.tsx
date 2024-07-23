@@ -38,11 +38,11 @@ function VersePicker({ isOpen, onClose }: Props) {
         {screen === "book" && (
           <BookScreen
             state={state}
-            onChoose={book => onChange({ book })}
+            onChoose={book => onChange({ book, chapter: null, verses: null })}
           />
         )}
         {screen === "chapter" && (
-          <ChapterScreen state={state} onChoose={chapter => onChange({ chapter })} />
+          <ChapterScreen state={state} onChoose={chapter => onChange({ chapter, verses: null })} />
         )}
         {screen === "verse" && <VerseScreen state={state} onChoose={verses => onChange({ verses })} />}
       </DrawerContent>

@@ -7,10 +7,12 @@ import {
 } from "@chakra-ui/react";
 import nvi from "data/nvi";
 import VersePart from "picker/VersePart";
+import { isValidReference } from "picker/utils/data";
 import { useNavigate } from "picker/utils/navigations";
 import { State } from "types";
 
 type Props = { onCancel: () => void; state: State; onSave: () => void };
+
 export default function MainScreen({ state, onCancel, onSave }: Props) {
   const navigate = useNavigate();
   const book = nvi.find(b => b.abbrev === state.book)?.name as string;
@@ -32,11 +34,13 @@ export default function MainScreen({ state, onCancel, onSave }: Props) {
             onChoose={() => navigate("book")}
           />
           <VersePart
+          	disabled={!state.book}
             label="Capítulo"
             onChoose={() => navigate("chapter")}
             value={`${state.chapter ?? ''}`}
           />
           <VersePart
+            disabled={!state.book || !state.chapter }
             label="Versículo"
             onChoose={() => navigate("verse")}
             value={formatVerses(state.verses)}
@@ -47,7 +51,7 @@ export default function MainScreen({ state, onCancel, onSave }: Props) {
         <Button variant="link" onClick={onCancel}>
           Cancelar
         </Button>
-        <Button colorScheme="purple" onClick={onSave}>
+        <Button colorScheme="purple" disabled={!isValidReference(state)} onClick={onSave}>
           Decorar
         </Button>
       </DrawerFooter>
