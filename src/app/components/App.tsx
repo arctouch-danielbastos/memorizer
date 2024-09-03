@@ -28,8 +28,6 @@ export default function MemorizerApp() {
   const onChangeVerse = (reference: VerseReference) => {
     onClose();
     const text = getVerseText(reference);
-    console.log('=== raw text', ...text);
-    console.log('=== new verses', ...STRATEGY.obfuscate(text));
     setWords(STRATEGY.obfuscate(text));
   }
 

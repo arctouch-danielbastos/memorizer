@@ -23,10 +23,6 @@ function VersePicker({ isOpen, onClose, onSave}: Props) {
     bookId: "73210" as string | null,
   });
 
-  useEffect(() => {
-    console.log('=== state', JSON.stringify(state));
-  }, [state]);
-
   const onChange = (change: Partial<VerseReference>) => {
     setState(state => ({ ...state, ...change }));
   };
