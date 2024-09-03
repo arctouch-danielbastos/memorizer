@@ -20,7 +20,7 @@ function VersePicker({ isOpen, onClose, onSave}: Props) {
   const [state, setState] = useState<VerseReference>({
     verses: [1, 10],
     chapter: 1,
-    book: "hb" as string | null,
+    bookId: "73210" as string | null,
   });
 
   useEffect(() => {
@@ -43,7 +43,7 @@ function VersePicker({ isOpen, onClose, onSave}: Props) {
         {screen === "book" && (
           <BookScreen
             state={state}
-            onChoose={book => onChange({ book, chapter: null, verses: null })}
+            onChoose={bookId => onChange({ bookId, chapter: null, verses: null })}
           />
         )}
         {screen === "chapter" && (

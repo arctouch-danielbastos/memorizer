@@ -4,19 +4,19 @@ import nullthrows from "nullthrows";
 import { VerseReference } from "types";
 
 function getChapterList(state: VerseReference) {
-	const { book } = state;
-	const chapterList = nvi.find(it => it.abbrev === book)?.chapters;
+	const { bookId } = state;
+	const chapterList = nvi.find(it => it.id === bookId)?.chapters;
 	return nullthrows(chapterList);
 }
 
 function getChapter(state: VerseReference){
 	const chapter = nullthrows(state.chapter);
 	const chapterList = getChapterList(state);
-	return nullthrows(chapterList[chapter]);
+	return nullthrows(chapterList[chapter - 1]);
 }
 
 export function getMaxVerseCount(state: VerseReference) {
-	return getChapter(state).length;
+	return getChapter(state).length + 1;
 }
 
 export function getMaxChapterCount(state: VerseReference) {
@@ -24,7 +24,7 @@ export function getMaxChapterCount(state: VerseReference) {
 }
 
 export function isValidReference(state: VerseReference) {
-	if (!state.book) return false;
+	if (!state.bookId) return false;
 	if (typeof state.chapter !== 'number') return false;
 	if (!Array.isArray(state.verses) || state.verses.length === 0) return false;
 	return true;
@@ -45,7 +45,7 @@ export function getVerseText(state: VerseReference){
 	const result: string[] = [];
 
 	for (const verseNum of getVerseRange(state)) {
-		result.push(chapter[verseNum]);
+		result.push(chapter[verseNum - 1]);
 	}
 
 	return result;

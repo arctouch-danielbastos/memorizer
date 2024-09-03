@@ -58,7 +58,7 @@ function RangePicker({ onClick, state }: PickerProps) {
 
   return (
     <SimpleGrid justifyContent="center" bg="purple.50" py={6} px={3} borderRadius="md" columns={7}>
-      {range(0, getMaxVerseCount(state)).map(num => (
+      {range(1, getMaxVerseCount(state)).map(num => (
         <Center sx={sx(verseStyle, { selected: isSelected(num), start: isStart(num), end: isEnd(num) })} onClick={() => onClick(num)} key={num}>
           {num}
         </Center>

@@ -43,7 +43,6 @@ function Word({ spec, isPeeking }: WordProp) {
     <span>
       {spec.hiddenForm.map(part => (
         <Segment
-          key={part.letters}
           part={part}
           isHidden={!isPeeking && spec.isHidden}
         />
@@ -58,7 +57,7 @@ export default function VerseText({ isPeeking, words }: Props) {
   return (
     <Text sx={sx(wrapperStyle)} as="article">
       {words.map(i => (
-        <Word key={i.raw} isPeeking={isPeeking} spec={i} />
+        <Word isPeeking={isPeeking} spec={i} />
       ))}
     </Text>
   );

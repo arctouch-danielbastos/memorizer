@@ -9,7 +9,6 @@ import TopBar from "components/TopBar";
 import VerseText from "components/VerseText";
 import VersePicker from "picker";
 import type { VerseReference } from "types";
-import nvi from "data/nvi";
 import { getVerseText } from "picker/utils/data";
 
 const VERSES = [
@@ -29,6 +28,8 @@ export default function MemorizerApp() {
   const onChangeVerse = (reference: VerseReference) => {
     onClose();
     const text = getVerseText(reference);
+    console.log('=== raw text', ...text);
+    console.log('=== new verses', ...STRATEGY.obfuscate(text));
     setWords(STRATEGY.obfuscate(text));
   }
 

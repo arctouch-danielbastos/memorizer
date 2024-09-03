@@ -13,8 +13,8 @@ import sx from "utils/sx";
 import type { VerseReference } from "types";
 
 const books = nvi.map(i => ({
+  id: i.id,
   name: i.name,
-  id: i.abbrev,
 }));
 
 const listStyle = { mx: 0 };
@@ -37,17 +37,17 @@ const itemStyle = defineStyleConfig({
 });
 
 type Props = {
-  onChoose: (book: VerseReference["book"] | null) => void;
+  onChoose: (bookId: VerseReference["bookId"] | null) => void;
   state: VerseReference;
 };
 
 export default function BookScreen({ onChoose, state }: Props) {
-  const { book } = state;
+  const { bookId } = state;
   const navigate = useNavigate();
   const navigateForward = useNavigateForward();
 
   const toggle = (id: string) => {
-    onChoose(id === book ? null : id);
+    onChoose(id === bookId ? null : id);
   };
 
   return (
@@ -56,7 +56,7 @@ export default function BookScreen({ onChoose, state }: Props) {
       <DrawerBody maxH={80}>
         <UnorderedList spacing={4} sx={listStyle} styleType="none">
           {books.map(cur => (
-            <ListItem sx={sx(itemStyle, { selected: book === cur.id })} onClick={() => toggle(cur.id)}
+            <ListItem sx={sx(itemStyle, { selected: bookId === cur.id })} onClick={() => toggle(cur.id)}
               fontSize="larger"
               key={cur.id}
             >
@@ -71,7 +71,7 @@ export default function BookScreen({ onChoose, state }: Props) {
         </Button>
         <Button
           variant="outline"
-          isDisabled={book === null}
+          isDisabled={bookId === null}
           colorScheme="purple"
           onClick={() => navigateForward("book")}
         >

@@ -15,7 +15,7 @@ type Props = { onCancel: () => void; state: VerseReference; onSave: (referece: V
 
 export default function MainScreen({ state, onCancel, onSave }: Props) {
   const navigate = useNavigate();
-  const book = nvi.find(b => b.abbrev === state.book)?.name as string;
+  const book = nvi.find(b => b.id === state.bookId)?.name as string;
 
   const handleSave = () => onSave(state);
 
@@ -36,13 +36,13 @@ export default function MainScreen({ state, onCancel, onSave }: Props) {
             onChoose={() => navigate("book")}
           />
           <VersePart
-          	disabled={!state.book}
+          	disabled={!state.bookId}
             label="Capítulo"
             onChoose={() => navigate("chapter")}
             value={`${state.chapter ?? ''}`}
           />
           <VersePart
-            disabled={!state.book || !state.chapter }
+            disabled={!state.bookId || !state.chapter }
             label="Versículo"
             onChoose={() => navigate("verse")}
             value={formatVerses(state.verses)}
